@@ -1,0 +1,69 @@
+# ========================
+# INSUREHUB .gitignore
+# ========================
+
+# --- Java / Maven ---
+backend/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.ctxt
+.mtj.tmp/
+hs_err_pid*
+replay_pid*
+
+# --- Maven Wrapper (keep wrapper jar, ignore downloaded maven) ---
+backend/.mvn/wrapper/maven-wrapper.jar
+!backend/.mvn/wrapper/maven-wrapper.properties
+
+# --- Spring Boot ---
+backend/uploads/
+backend/logs/
+
+# --- Node.js / React ---
+frontend/node_modules/
+frontend/dist/
+frontend/.cache/
+frontend/*.local
+
+# --- Python ---
+ai-service/__pycache__/
+ai-service/*.pyc
+ai-service/.venv/
+ai-service/venv/
+ai-service/.env
+
+# --- Environment files ---
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+
+# --- IDE ---
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Misc ---
+*.tmp
+*.bak
+*.swp
+*~
