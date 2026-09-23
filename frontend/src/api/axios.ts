@@ -2,13 +2,18 @@ import axios from 'axios';
 
 /**
  * Configured Axios instance for InsureHub API calls.
- * 
- * In development, Vite proxies /api/* requests to http://localhost:8080
- * so we use a relative base URL. The JWT token and user headers are attached
- * automatically via the request interceptor.
+ *
+ * Production (Vercel):
+ * VITE_API_URL points to the Railway backend.
+ *
+ * Development:
+ * If VITE_API_URL is not defined, use Vite's /api proxy
+ * which points to http://localhost:8080.
  */
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL ? `${API_BASE_URL}/api` : '/api',
   headers: {
     'Content-Type': 'application/json',
   },
