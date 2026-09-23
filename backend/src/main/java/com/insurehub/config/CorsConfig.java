@@ -19,6 +19,7 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
+                "https://insurancehub-opal.vercel.app",
                 "http://localhost:5173",  // Vite dev server
                 "http://localhost:3000"   // Fallback
         ));
