@@ -19,23 +19,6 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
       padding: '24px 16px',
       position: 'relative'
     }}>
-      {/* Top Demo Banner */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: '#fffbeb',
-        borderBottom: '1px solid #fef08a',
-        color: '#92400e',
-        fontSize: '12px',
-        fontWeight: 500,
-        textAlign: 'center',
-        padding: '6px 16px'
-      }}>
-        ⚠️ Academic Demonstration — Not connected to actual insurers or financial institutions.
-      </div>
-
       <div style={{
         width: '100%',
         maxWidth: 440,
@@ -44,7 +27,6 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
         boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)',
         border: '1px solid #e2e8f0',
         padding: '36px 32px',
-        marginTop: 32
       }}>
         {/* Brand Header */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>

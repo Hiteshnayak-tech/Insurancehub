@@ -20,10 +20,6 @@ export const Footer: React.FC = () => {
             <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
               Empowering individuals and families with transparent insurance comparison, fair cost estimates, simulated policy management, and intelligent coverage breakdowns.
             </p>
-            <div className="pt-2 flex items-center gap-3 text-xs text-amber-400/90 bg-amber-950/40 border border-amber-800/40 px-3.5 py-2 rounded-xl max-w-md">
-              <span className="text-base">⚠️</span>
-              <span><strong>College Project Demo:</strong> Not connected to actual banking or insurance underwriters.</span>
-            </div>
           </div>
 
           {/* Quick Links */}

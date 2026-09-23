@@ -18,15 +18,8 @@ export function CustomerFooter() {
               </span>
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.7, maxWidth: 240 }}>
-              Transparent insurance comparison and management platform built as an academic demonstration.
+              Transparent insurance comparison and management platform.
             </p>
-            <div style={{
-              marginTop: 16, padding: '10px 14px', background: 'rgba(245,158,11,0.12)',
-              border: '1px solid rgba(245,158,11,0.2)', borderRadius: 8,
-              fontSize: 11, color: '#fbbf24', lineHeight: 1.5
-            }}>
-              ⚠️ Demo Project — Not connected to actual insurers or payment systems.
-            </div>
           </div>
 
           {/* Explore */}

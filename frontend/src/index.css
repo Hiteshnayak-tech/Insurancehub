@@ -575,13 +575,20 @@ a { text-decoration: none; color: inherit; }
   100% { background-position: -200% 0; }
 }
 
-/* Demo Banner */
-.ih-demo-banner {
-  background: #fef3c7;
-  border-bottom: 1px solid #fde68a;
-  padding: 8px 24px;
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #92400e;
+
+/* ============================================================ */
+/* Plan Details Page – Responsive Grid                          */
+/* Scoped to .plan-details-page to avoid affecting other pages  */
+/* ============================================================ */
+
+@media (min-width: 1024px) {
+  .plan-details-page > div:nth-child(2) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .plan-details-page > div:nth-child(2) {
+    grid-template-columns: 1fr;
+  }
 }

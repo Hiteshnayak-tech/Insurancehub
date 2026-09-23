@@ -49,37 +49,52 @@ export default function PlanDetailPage() {
 
   return (
     <CustomerLayout>
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '32px 20px 64px' }}>
-          
+      <div className="plan-details-page" style={{ maxWidth: 1240, margin: '0 auto', padding: '32px 20px 64px' }}>
+
           {/* Back breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '12px', fontWeight: 600, color: '#64748b', marginBottom: 24 }}>
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="hover:text-blue-600 flex items-center gap-1"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '12px', fontWeight: 600, padding: 0 }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#1e50b3')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#64748b')}
             >
               ← Back
             </button>
             <span>/</span>
-            <Link to="/plans" className="hover:text-blue-600">Plans</Link>
+            <Link to="/plans" style={{ color: '#64748b', textDecoration: 'none' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#1e50b3')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#64748b')}
+            >Plans</Link>
             <span>/</span>
-            <span className="text-slate-800">{plan.name}</span>
+            <span style={{ color: '#0f172a' }}>{plan.name}</span>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            
+          {/* Two-column grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 28, alignItems: 'start' }}>
+
             {/* Left Column: Plan In-Depth Details */}
-            <div className="lg:col-span-8 space-y-6">
-              
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+
               {/* Primary Card */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full">
+              <div style={{
+                background: '#ffffff', borderRadius: 20, border: '1px solid #e2e8f0',
+                padding: '24px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)'
+              }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 16 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{
+                      fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em',
+                      color: '#1e40af', background: '#eff6ff', padding: '4px 12px', borderRadius: 9999
+                    }}>
                       {plan.category} Insurance
                     </span>
                     {plan.popular && (
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full">
+                      <span style={{
+                        fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em',
+                        color: '#92400e', background: '#fffbeb', padding: '4px 12px', borderRadius: 9999
+                      }}>
                         ⭐ Popular Choice
                       </span>
                     )}
@@ -88,42 +103,49 @@ export default function PlanDetailPage() {
                   <button
                     type="button"
                     onClick={() => toggleCompare(plan)}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
-                      inComp ? 'bg-cyan-50 border-cyan-400 text-cyan-800' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                    }`}
+                    style={{
+                      padding: '6px 14px', borderRadius: 12, fontSize: '12px', fontWeight: 600,
+                      border: `1.5px solid ${inComp ? '#22d3ee' : '#e2e8f0'}`,
+                      background: inComp ? '#ecfeff' : '#f8fafc',
+                      color: inComp ? '#0e7490' : '#475569',
+                      cursor: 'pointer', transition: 'all 0.15s'
+                    }}
                   >
                     {inComp ? '✓ In Compare List' : '+ Add to Compare'}
                   </button>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                <h1 style={{ fontSize: '26px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                   {plan.name}
                 </h1>
-                <p className="text-sm font-semibold text-slate-500 mt-1">
-                  Offered by <span className="text-blue-600 font-bold">{plan.insurerName}</span>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: '#64748b', marginTop: 4 }}>
+                  Offered by <span style={{ color: '#1e50b3', fontWeight: 700 }}>{plan.insurerName}</span>
                 </p>
 
-                <p className="text-slate-600 text-sm mt-4 leading-relaxed">
+                <p style={{ color: '#475569', fontSize: '14px', marginTop: 16, lineHeight: 1.7 }}>
                   {plan.description}
                 </p>
 
                 {/* Quantitative Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t border-slate-100">
-                  <div className="p-3.5 bg-slate-50 rounded-2xl">
-                    <p className="text-xs text-slate-400">Sum Insured Limit</p>
-                    <p className="text-base sm:text-lg font-bold text-slate-800 mt-0.5">
+                <div style={{
+                  display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                  gap: 14, marginTop: 24, paddingTop: 24, borderTop: '1px solid #f1f5f9'
+                }}>
+                  <div style={{ padding: 14, background: '#f8fafc', borderRadius: 14 }}>
+                    <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>Sum Insured Limit</p>
+                    <p style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', marginTop: 4 }}>
                       ₹{(plan.coverageLimit / 100000).toFixed(1)} Lakhs
                     </p>
                   </div>
-                  <div className="p-3.5 bg-slate-50 rounded-2xl">
-                    <p className="text-xs text-slate-400">Claim Settlement Ratio</p>
-                    <p className="text-base sm:text-lg font-bold text-emerald-600 mt-0.5">
+                  <div style={{ padding: 14, background: '#f8fafc', borderRadius: 14 }}>
+                    <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>Claim Settlement Ratio</p>
+                    <p style={{ fontSize: '17px', fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
                       {plan.claimSettlementRatio}%
                     </p>
                   </div>
-                  <div className="p-3.5 bg-slate-50 rounded-2xl col-span-2 sm:col-span-1">
-                    <p className="text-xs text-slate-400">Cashless Network</p>
-                    <p className="text-base sm:text-lg font-bold text-slate-800 mt-0.5">
+                  <div style={{ padding: 14, background: '#f8fafc', borderRadius: 14 }}>
+                    <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>Cashless Network</p>
+                    <p style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', marginTop: 4 }}>
                       {plan.cashlessHospitals ? `${plan.cashlessHospitals.toLocaleString()}+ centers` : 'Nationwide Claim'}
                     </p>
                   </div>
@@ -131,17 +153,24 @@ export default function PlanDetailPage() {
               </div>
 
               {/* What's Covered (Features) */}
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm">
-                    ✓
-                  </span>
-                  <h2 className="text-lg font-bold text-slate-900">What is Covered (Key Features)</h2>
+              <div style={{
+                background: '#ffffff', borderRadius: 20, border: '1px solid #e2e8f0',
+                padding: '24px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                  <span style={{
+                    width: 28, height: 28, borderRadius: 8, background: '#f0fdf4', color: '#16a34a',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '13px'
+                  }}>✓</span>
+                  <h2 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', margin: 0 }}>What is Covered (Key Features)</h2>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 10 }}>
                   {plan.features.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 text-xs sm:text-sm text-slate-700">
-                      <span className="text-emerald-500 font-bold mt-0.5">✓</span>
+                    <div key={i} style={{
+                      display: 'flex', alignItems: 'flex-start', gap: 10, padding: 12,
+                      borderRadius: 12, background: '#f8fafc', fontSize: '13px', color: '#334155'
+                    }}>
+                      <span style={{ color: '#16a34a', fontWeight: 700, marginTop: 1 }}>✓</span>
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -149,20 +178,27 @@ export default function PlanDetailPage() {
               </div>
 
               {/* Critical Exclusions (Transparency highlight) */}
-              <div className="bg-white rounded-3xl border border-rose-200/80 p-6 sm:p-8 shadow-xs">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
-                    ✕
-                  </span>
-                  <h2 className="text-lg font-bold text-slate-900">Transparent Exclusions &amp; Waiting Periods</h2>
+              <div style={{
+                background: '#ffffff', borderRadius: 20, border: '1px solid rgba(244,63,94,0.25)',
+                padding: '24px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                  <span style={{
+                    width: 28, height: 28, borderRadius: 8, background: '#fff1f2', color: '#e11d48',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '13px'
+                  }}>✕</span>
+                  <h2 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', margin: 0 }}>Transparent Exclusions &amp; Waiting Periods</h2>
                 </div>
-                <p className="text-xs text-slate-500 mb-4">
+                <p style={{ fontSize: '12px', color: '#64748b', marginBottom: 16 }}>
                   We believe in zero surprises when filing a claim. The following circumstances are strictly not covered under this standard contract:
                 </p>
-                <div className="space-y-2.5">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {plan.exclusions.map((excl, i) => (
-                    <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-rose-50/50 border border-rose-100 text-xs sm:text-sm text-slate-700">
-                      <span className="text-rose-500 font-bold mt-0.5">✕</span>
+                    <div key={i} style={{
+                      display: 'flex', alignItems: 'flex-start', gap: 10, padding: 12,
+                      borderRadius: 12, background: '#fff5f5', border: '1px solid #fecaca', fontSize: '13px', color: '#334155'
+                    }}>
+                      <span style={{ color: '#e11d48', fontWeight: 700, marginTop: 1 }}>✕</span>
                       <span>{excl}</span>
                     </div>
                   ))}
@@ -172,31 +208,37 @@ export default function PlanDetailPage() {
             </div>
 
             {/* Right Column: Sticky Pricing & Checkout Action */}
-            <div className="lg:col-span-4">
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xl sticky top-24 space-y-5">
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Premium</span>
-                  <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-3xl font-extrabold text-slate-900">₹{finalPrice.toLocaleString()}</span>
-                    <span className="text-xs text-slate-500">for {tenureYears} {tenureYears > 1 ? 'years' : 'year'}</span>
+            <div>
+              <div style={{
+                background: '#ffffff', borderRadius: 20, border: '1px solid #e2e8f0',
+                padding: 24, boxShadow: '0 8px 24px rgba(0,0,0,0.08)', position: 'sticky', top: 84
+              }}>
+                <div style={{ marginBottom: 20 }}>
+                  <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8' }}>Total Premium</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 4 }}>
+                    <span style={{ fontSize: '28px', fontWeight: 800, color: '#0f172a' }}>₹{finalPrice.toLocaleString()}</span>
+                    <span style={{ fontSize: '12px', color: '#64748b' }}>for {tenureYears} {tenureYears > 1 ? 'years' : 'year'}</span>
                   </div>
-                  <p className="text-[11px] text-emerald-600 font-semibold mt-1">✓ Includes all applicable regulatory GST &amp; fees</p>
+                  <p style={{ fontSize: '11px', color: '#16a34a', fontWeight: 600, marginTop: 4 }}>✓ Includes all applicable regulatory GST &amp; fees</p>
                 </div>
 
                 {/* Tenure Selector */}
-                <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-2">Policy Duration</label>
-                  <div className="grid grid-cols-3 gap-2">
+                <div style={{ marginBottom: 20 }}>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: '#334155', display: 'block', marginBottom: 8 }}>Policy Duration</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
                     {[1, 2, 3].map((yr) => (
                       <button
                         type="button"
                         key={yr}
                         onClick={() => setTenureYears(yr)}
-                        className={`py-2 rounded-xl text-xs font-semibold border transition-all ${
-                          tenureYears === yr
-                            ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
+                        style={{
+                          padding: '9px 0', borderRadius: 12, fontSize: '12px', fontWeight: 600,
+                          border: `1.5px solid ${tenureYears === yr ? '#2563eb' : '#e2e8f0'}`,
+                          background: tenureYears === yr ? '#2563eb' : '#f8fafc',
+                          color: tenureYears === yr ? '#ffffff' : '#475569',
+                          cursor: 'pointer', transition: 'all 0.15s',
+                          boxShadow: tenureYears === yr ? '0 2px 6px rgba(37,99,235,0.2)' : 'none'
+                        }}
                       >
                         {yr} {yr === 1 ? 'Year' : 'Years'}
                       </button>
@@ -208,30 +250,43 @@ export default function PlanDetailPage() {
                 <button
                   type="button"
                   onClick={() => setPurchaseModalOpen(true)}
-                  className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-sm shadow-md shadow-blue-500/20 transition-all flex items-center justify-center gap-2"
+                  style={{
+                    width: '100%', padding: '14px 0', borderRadius: 12,
+                    background: '#2563eb', color: '#ffffff', fontWeight: 700, fontSize: '14px',
+                    border: 'none', cursor: 'pointer', transition: 'all 0.15s',
+                    boxShadow: '0 4px 12px rgba(37,99,235,0.25)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.background = '#1d4ed8')}
+                  onMouseLeave={e => (e.currentTarget.style.background = '#2563eb')}
                 >
                   <span>⚡</span> Instant Simulated Purchase
                 </button>
 
-                <div className="text-center">
+                <div style={{ textAlign: 'center', marginTop: 12 }}>
                   <Link
                     to="/calculator"
-                    className="text-xs text-blue-600 hover:underline font-semibold"
+                    style={{ fontSize: '12px', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}
+                    onMouseEnter={e => (e.currentTarget.style.textDecoration = 'underline')}
+                    onMouseLeave={e => (e.currentTarget.style.textDecoration = 'none')}
                   >
                     Calculate custom quotation with age factor →
                   </Link>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 space-y-2 text-[11px] text-slate-500">
-                  <div className="flex items-center gap-2">
+                <div style={{
+                  paddingTop: 16, marginTop: 16, borderTop: '1px solid #f1f5f9',
+                  display: 'flex', flexDirection: 'column', gap: 10, fontSize: '11px', color: '#64748b'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span>🛡️</span>
                     <span>15-Day Free Look Guarantee Cancellation</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span>⚡</span>
                     <span>Instant Digital Policy Issuance</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span>📜</span>
                     <span>Recognized Tax Saving Certificate</span>
                   </div>
@@ -242,49 +297,64 @@ export default function PlanDetailPage() {
 
       {/* ── PURCHASE SIMULATION MODAL ── */}
       {purchaseModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-100 animate-fade-in max-h-[90vh] overflow-y-auto">
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 50,
+          background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16
+        }}>
+          <div style={{
+            background: '#ffffff', borderRadius: 20, maxWidth: 440, width: '100%',
+            padding: '24px 28px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            border: '1px solid #f1f5f9', maxHeight: '90vh', overflowY: 'auto'
+          }}>
             {!purchaseSuccess ? (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <h3 className="text-lg font-bold text-slate-900">Simulate Policy Purchase</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 12, borderBottom: '1px solid #f1f5f9' }}>
+                  <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#0f172a', margin: 0 }}>Simulate Policy Purchase</h3>
                   <button
                     type="button"
                     onClick={() => setPurchaseModalOpen(false)}
-                    className="text-slate-400 hover:text-slate-600 text-lg p-1"
+                    style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: '18px', cursor: 'pointer', padding: 4 }}
                   >
                     ✕
                   </button>
                 </div>
 
-                <div className="p-3 bg-blue-50/70 rounded-2xl border border-blue-100 text-xs">
-                  <p className="font-bold text-blue-900">{plan.name}</p>
-                  <p className="text-blue-700 mt-0.5">{plan.insurerName} • {tenureYears} Year Coverage</p>
-                  <p className="font-bold text-slate-900 text-sm mt-1">Total: ₹{finalPrice.toLocaleString()}</p>
+                <div style={{ padding: 12, background: '#eff6ff', borderRadius: 14, border: '1px solid #dbeafe', fontSize: '12px' }}>
+                  <p style={{ fontWeight: 700, color: '#1e3a5f', margin: 0 }}>{plan.name}</p>
+                  <p style={{ color: '#2563eb', marginTop: 2 }}>{plan.insurerName} • {tenureYears} Year Coverage</p>
+                  <p style={{ fontWeight: 700, color: '#0f172a', fontSize: '14px', marginTop: 4 }}>Total: ₹{finalPrice.toLocaleString()}</p>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1.5">Insured Member Name</label>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: '#334155', display: 'block', marginBottom: 6 }}>Insured Member Name</label>
                   <input
                     type="text"
                     defaultValue={user ? `${user.firstName} ${user.lastName}` : 'Rahul Sharma'}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 bg-slate-50"
+                    style={{
+                      width: '100%', padding: '10px 14px', borderRadius: 12,
+                      border: '1.5px solid #e2e8f0', fontSize: '13px', fontWeight: 500,
+                      color: '#0f172a', background: '#f8fafc', outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1.5">Select Simulated Payment Method</label>
-                  <div className="grid grid-cols-3 gap-2">
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: '#334155', display: 'block', marginBottom: 6 }}>Select Simulated Payment Method</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
                     {['UPI', 'Credit Card', 'Net Banking'].map((method) => (
                       <button
                         type="button"
                         key={method}
                         onClick={() => setPaymentMethod(method)}
-                        className={`py-2 px-1 rounded-xl text-xs font-semibold border transition-all text-center ${
-                          paymentMethod === method
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
+                        style={{
+                          padding: '9px 4px', borderRadius: 12, fontSize: '12px', fontWeight: 600,
+                          border: `1.5px solid ${paymentMethod === method ? '#2563eb' : '#e2e8f0'}`,
+                          background: paymentMethod === method ? '#2563eb' : '#f8fafc',
+                          color: paymentMethod === method ? '#ffffff' : '#475569',
+                          cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center'
+                        }}
                       >
                         {method}
                       </button>
@@ -292,16 +362,24 @@ export default function PlanDetailPage() {
                   </div>
                 </div>
 
-                <div className="pt-3">
+                <div style={{ paddingTop: 12 }}>
                   <button
                     type="button"
                     onClick={handlePurchase}
                     disabled={isProcessing}
-                    className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                    style={{
+                      width: '100%', padding: '12px 0', borderRadius: 12,
+                      background: '#16a34a', color: '#ffffff', fontWeight: 700, fontSize: '14px',
+                      border: 'none', cursor: isProcessing ? 'not-allowed' : 'pointer',
+                      opacity: isProcessing ? 0.7 : 1,
+                      boxShadow: '0 4px 12px rgba(22,163,74,0.25)',
+                      transition: 'all 0.15s',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
+                    }}
                   >
                     {isProcessing ? (
                       <>
-                        <span className="animate-spin">⏳</span>
+                        <span>⏳</span>
                         <span>Confirming Simulated Payment...</span>
                       </>
                     ) : (
@@ -313,38 +391,48 @@ export default function PlanDetailPage() {
                 </div>
               </div>
             ) : (
-              <div className="text-center py-4 space-y-4">
-                <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto">
-                  ✓
-                </div>
+              <div style={{ textAlign: 'center', padding: '16px 0', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div style={{
+                  width: 56, height: 56, background: '#dcfce7', color: '#16a34a',
+                  borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '24px', margin: '0 auto'
+                }}>✓</div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">Policy Issued Successfully!</h3>
-                  <p className="text-xs text-slate-500 mt-1">Your coverage is active. Stored in your dashboard.</p>
+                  <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#0f172a', margin: 0 }}>Policy Issued Successfully!</h3>
+                  <p style={{ fontSize: '12px', color: '#64748b', marginTop: 4 }}>Your coverage is active. Stored in your dashboard.</p>
                 </div>
 
-                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left text-xs space-y-1.5">
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Policy Number:</span>
-                    <span className="font-bold text-blue-600">{generatedPolicyNumber}</span>
+                <div style={{
+                  background: '#f8fafc', padding: 16, borderRadius: 14,
+                  border: '1px solid #e2e8f0', textAlign: 'left', fontSize: '12px',
+                  display: 'flex', flexDirection: 'column', gap: 8
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#64748b' }}>Policy Number:</span>
+                    <span style={{ fontWeight: 700, color: '#2563eb' }}>{generatedPolicyNumber}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Plan:</span>
-                    <span className="font-bold text-slate-800">{plan.name}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#64748b' }}>Plan:</span>
+                    <span style={{ fontWeight: 700, color: '#0f172a' }}>{plan.name}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Status:</span>
-                    <span className="font-bold text-emerald-600">ACTIVE</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#64748b' }}>Status:</span>
+                    <span style={{ fontWeight: 700, color: '#16a34a' }}>ACTIVE</span>
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2">
+                <div style={{ display: 'flex', gap: 8, paddingTop: 8 }}>
                   <button
                     type="button"
                     onClick={() => {
                       setPurchaseModalOpen(false);
                       setPurchaseSuccess(false);
                     }}
-                    className="flex-1 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                    style={{
+                      flex: 1, padding: '10px 0', borderRadius: 12,
+                      border: '1.5px solid #e2e8f0', background: '#ffffff',
+                      fontSize: '12px', fontWeight: 600, color: '#475569', cursor: 'pointer'
+                    }}
                   >
                     Close
                   </button>
@@ -354,7 +442,11 @@ export default function PlanDetailPage() {
                       setPurchaseModalOpen(false);
                       navigate('/dashboard');
                     }}
-                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700"
+                    style={{
+                      flex: 1, padding: '10px 0', borderRadius: 12,
+                      border: 'none', background: '#2563eb',
+                      fontSize: '12px', fontWeight: 600, color: '#ffffff', cursor: 'pointer'
+                    }}
                   >
                     Go to Dashboard →
                   </button>
